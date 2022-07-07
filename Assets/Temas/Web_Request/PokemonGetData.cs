@@ -34,9 +34,25 @@ public class PokemonGetData : MonoBehaviour
 
     public void LoadJsonCallBack(string jsonData)
     {
-       var pokemonInfoSerializado = JsonUtility.FromJson<pokemonInfo>(jsonData);
+        var pokemonInfoSerializado = JsonUtility.FromJson<pokemonInfo>(jsonData);
         pokemonNameText.text = pokemonInfoSerializado.name;
+        pokemonNameText.text = pokemonInfoSerializado.name;
+        pokemonNumberText.text = pokemonInfoSerializado.id.ToString();
+        pokemonTypeText.text = "";
+        foreach (var item in pokemonInfoSerializado.types)
+        {
+            pokemonTypeText.text += " "+ item.type.name +" ";
+        }
+        
+        
+        
+        StartCoroutine(ApiRestServices.GetImage(pokemonInfoSerializado.sprites.front_default, SetPokemonRawIamge));
+       
+    }
 
+    public void SetPokemonRawIamge(Texture texture)
+    {        
+        pokemonImage.texture = texture;
     }
     
 }

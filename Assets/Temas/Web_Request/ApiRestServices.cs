@@ -53,5 +53,20 @@ public class ApiRestServices : MonoBehaviour
         
     }
 
+    public static IEnumerator PostAuth(string nameOrnumber, Action<string> callBack)
+    {
+       var formulario = new FormData();
+       formulario.AccessToken = "asfasfasf";
+       formulario.TitleId = "safasf";
+
+       var formularioSerializado = JsonUtility.ToJson(formulario);
+
+        var request = UnityWebRequest.Post("https://titleId.playfabapi.com/Client/LoginWithFacebook", formularioSerializado);
+
+        yield return request.SendWebRequest();
+
+                
+    }
+
     
 }
